@@ -1,3 +1,5 @@
+import MainView from '@/views/MainView.vue';
+import { componentSizeMap } from 'element-plus';
 import { createRouter, createWebHistory } from 'vue-router';
  
 // import AttackSimulation from './views/AttackSimulation.vue';
@@ -6,14 +8,16 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 export const routes = [
     { 
-        path: '/MainView', 
+        path: '/', 
         name: 'MainView',
-        component: () => import('../views/MainView.vue')
-    },
-    { 
-        path: '/Detection', 
-        name: 'Detection',
-        component: () => import('../components/HelloWorld.vue')
+        component: MainView,
+        children:[
+            {
+                path: '/Detection', 
+                name: 'Detection',
+                component: () => import('../views/AboutView.vue')
+            }
+        ]
     }
 ];
 

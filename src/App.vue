@@ -20,7 +20,7 @@ const router = useRouter();
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+text-align: center;
   color: #2cb68f;
   margin-top: 0px;
 }

@@ -1,10 +1,10 @@
 
 <template>
     <div>
-      <div class="topbar">
       <el-menu
         mode="horizontal"
         :popper-offset="0"
+        :ellipsis="false"
         class="topbar"
   
         >
@@ -23,9 +23,8 @@
         <el-menu-item index="3" class = "custom-menu-item" @click="methods.menuItemClick('Detection')">属性感知</el-menu-item>
         <el-menu-item index="4" class = "custom-menu-item">载荷调整</el-menu-item>
       </el-menu>
+      <router-view></router-view>
     </div>
-    </div>
-    
 </template>
   
   <script lang="ts" setup>
@@ -40,7 +39,7 @@
           });
       }
   };
-  
+
   </script>
   
   <style>
@@ -59,9 +58,6 @@
     color: #fff
   }
   
-  .back {
-    background: #e9e0e7
-  }
   
   .custom-menu-item{
     background-color: transparent !important;
