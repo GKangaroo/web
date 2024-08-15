@@ -16,6 +16,21 @@ export const routes = [
                 path: '/Detection', 
                 name: 'Detection',
                 component: () => import('../views/AboutView.vue')
+            },
+            {
+                path: '/IPv6', 
+                name: 'IPv6',
+                component: () => import('../views/IPv6/IPv6.vue')
+            },
+            {
+                path: '/Insert', 
+                name: 'Insert',
+                component: () => import('../views/IPv6/IPInsert.vue')
+            },
+            {
+                path: '/Deny', 
+                name: 'Deny',
+                component: () => import('../views/IPv6/IPDeny.vue')
             }
         ]
     }
