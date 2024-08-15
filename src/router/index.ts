@@ -8,7 +8,7 @@ export const routes = [
     { 
         path: '/MainView', 
         name: 'MainView',
-        component: () => import('../App.vue')
+        component: () => import('../views/MainView.vue')
     },
     { 
         path: '/Detection', 

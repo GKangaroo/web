@@ -8,9 +8,9 @@ import { useRouter } from 'vue-router';
 import { onMounted } from 'vue';
 const router = useRouter();
 
-onMounted(() => {
-  router.push({ name: 'MainView' });
-});
+// onMounted(() => {
+//   router.push({ name: 'MainView' });
+// });
 
 
 </script>

@@ -26,16 +26,12 @@
     </div>
     </div>
     
-  </template>
+</template>
   
   <script lang="ts" setup>
   import { useRouter } from 'vue-router';
   import { onMounted } from 'vue';
   const router = useRouter();
-  
-  onMounted(() => {
-    router.push({ name: 'MainView' });
-  });
   
   const methods = {
       menuItemClick: (name: string) => {
