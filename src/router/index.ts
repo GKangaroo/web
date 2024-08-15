@@ -4,16 +4,17 @@ import { createRouter, createWebHistory } from 'vue-router';
 // import VulnerabilityMeasurement from './views/VulnerabilityMeasurement.vue'; 
 // import PayloadAdjustment from './views/PayloadAdjustment.vue'; 
 
-
-
 export const routes = [
     { 
-        path: '/MainPage', 
+        path: '/MainView', 
+        name: 'MainView',
         component: () => import('../App.vue')
+    },
+    { 
+        path: '/Detection', 
+        name: 'Detection',
+        component: () => import('../components/HelloWorld.vue')
     }
-    // { path: '/attack-simulation', component: AttackSimulation },
-    // { path: '/vulnerability-measurement', component: VulnerabilityMeasurement },
-    // { path: '/payload-adjustment', component: PayloadAdjustment },
 ];
 
 const router = createRouter({
