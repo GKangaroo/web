@@ -23,14 +23,29 @@ export const routes = [
                 component: () => import('../views/IPv6/IPv6.vue')
             },
             {
-                path: '/Insert', 
+                path: '/IPv6/Insert', 
                 name: 'Insert',
                 component: () => import('../views/IPv6/IPInsert.vue')
             },
             {
-                path: '/Deny', 
+                path: '/IPv6/Deny', 
                 name: 'Deny',
                 component: () => import('../views/IPv6/IPDeny.vue')
+            },
+            {
+                path: '/DoHT', 
+                name: 'DoHT',
+                component: () => import('../views/DoTDoH/DotDoH.vue')
+            },
+            {
+                path: '/DoTDoH/api-1', 
+                name: 'DoHInsert',
+                component: () => import('../views/DoTDoH/DenyView.vue')
+            },
+            {
+                path: '/DoTDoH/api-2', 
+                name: 'DoHDeny',
+                component: () => import('../views/DoTDoH/ResolveView.vue')
             },
             {
                 path: '/DNSSEC', 

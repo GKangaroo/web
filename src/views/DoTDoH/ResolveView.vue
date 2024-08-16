@@ -3,33 +3,6 @@ import { effect, onMounted, reactive } from 'vue';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 let IntervalId:number;
 const methods = {
-	Attack: async () => {
-		state.isAttacking = !state.isAttacking;
-		if (state.isAttacking) {
-			state.buttonText = '停止攻击';
-			state.buttonStyle.backgroundColor = 'red';
-			const { data } = await axios.post('/ipv6api/stop');
-			state.polling = false
-		} else {
-			state.buttonText = '继续攻击';
-			state.buttonStyle.backgroundColor = '#409eff';
-			const { data } = await axios.post('/ipv6api/start', state.form);
-			state.polling = true
-		}
-
-		const fetchUpdate = async () => {
-			const response = await axios.get('/ipv6api/history');
-			state.attackline = response.data.join('');
-		};
-
-		if (!state.polling) {
-			IntervalId = setInterval(fetchUpdate, 1000);
-		} else {
-			const stopPolling = () => {
-				clearInterval(IntervalId);
-			};
-		}
-	},
 	GetEffect: async () => {
 		const { data } = await axios.get('/ipv6api/getresult');
 		state.effect = data
@@ -74,15 +47,15 @@ const state = reactive({
 <template>
 	<div class="display-flex j-c-c a-i-c height100">
 		<div class="login-form">
-			<h1 class="title">请输入Ipv6地址和模式</h1>
+			<h1 class="title">Input</h1>
 			<el-form :model="state.form">
 				<el-form-item prop="email">
 					<br/><br/>
 					<el-input v-model="state.form.victim" placeholder="请输入Ipv6地址"></el-input>
 				</el-form-item>
 				<el-radio-group v-model="state.form.mode">
-					<el-radio value="0">篡改模式</el-radio>
-					<el-radio value="1">攻击模式</el-radio>
+					<el-radio value="0">解析数据注入</el-radio>
+					<el-radio value="1">解析数据篡改</el-radio>
 				</el-radio-group>
 
 				<el-form-item class="button-container">

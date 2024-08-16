@@ -60,16 +60,16 @@ const state = reactive({
 		<div class="login-form">
 			<h1 class="title">Input</h1>
 			<el-form :model="state.form">
-				<el-form-item prop="email">
+				<el-form-item prop="email" label="域名       ">
 					<el-input v-model="state.form.Ip" placeholder="type domain"></el-input>
 				</el-form-item>
-                <el-form-item prop="email">
+                <el-form-item prop="email" label="递归解析器Ip">
 					<el-input v-model="state.form.Ip" placeholder="type resolver_Ip"></el-input>
 				</el-form-item>
-                <el-form-item prop="email">
+                <el-form-item prop="email" label="攻击的Ip">
 					<el-input v-model="state.form.Ip" placeholder="type attack_ip"></el-input>
 				</el-form-item>
-                <el-form-item prop="email">
+                <el-form-item prop="email" label="TTL">
 					<el-input v-model="state.form.Ip" placeholder="type attack_ttl"></el-input>
 				</el-form-item>
 
