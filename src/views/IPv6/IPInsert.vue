@@ -80,20 +80,24 @@ const state = reactive({
 
 	<el-scrollbar class="Output"> <!-- 设置最大高度以允许滚动 -->
         <el-form :inline="true" class="demo-form-inline">
-            <el-form-item label="Approved by">
+            <el-form-item >
                 <el-input 
                     v-model="state.form.Ip" 
-                    placeholder="Approved by" 
+                    placeholder="攻击输出" 
                     clearable 
                     maxlength="20"
+					disabled="true"
+					class = "OutputBox"
                 />
             </el-form-item>
-            <el-form-item label="Activity zone">
+            <el-form-item>
                 <el-input 
                     v-model="state.form.Ip" 
-                    placeholder="Activity zone" 
+                    placeholder="效果输出" 
                     clearable 
                     maxlength="20"
+					readonly="true"
+					class = "OutputBox"
                 />
             </el-form-item>
         </el-form>
@@ -111,6 +115,15 @@ const state = reactive({
 	box-shadow: 3px 3px 10px 8px #f1f1f1;
 }
 
+.OutputBox {
+	width: 400px;
+	height: 220px;
+	margin: 0 auto;
+	padding: 10px;
+	border-radius: 2px;
+	box-shadow: 3px 3px 10px 8px #f1f1f1;
+}
+
 .code-box {
 	position: absolute;
 	right: 0;
@@ -120,7 +133,7 @@ const state = reactive({
 
 .Output {
 	position: relative;
-	margin-top: 50px;
+	margin-top: 10px;
 }
 
 .Mybutton {

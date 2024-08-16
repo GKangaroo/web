@@ -61,7 +61,16 @@ const state = reactive({
 			<h1 class="title">Input</h1>
 			<el-form :model="state.form">
 				<el-form-item prop="email">
-					<el-input v-model="state.form.Ip" placeholder="type IPv6"></el-input>
+					<el-input v-model="state.form.Ip" placeholder="type domain"></el-input>
+				</el-form-item>
+                <el-form-item prop="email">
+					<el-input v-model="state.form.Ip" placeholder="type resolver_Ip"></el-input>
+				</el-form-item>
+                <el-form-item prop="email">
+					<el-input v-model="state.form.Ip" placeholder="type attack_ip"></el-input>
+				</el-form-item>
+                <el-form-item prop="email">
+					<el-input v-model="state.form.Ip" placeholder="type attack_ttl"></el-input>
 				</el-form-item>
 
 				<el-form-item class="button-container">
@@ -72,15 +81,6 @@ const state = reactive({
 				</el-form-item>
 			</el-form>
 		</div>
-
-    <div class="Output-form">
-			<h1 class="title">Output</h1>
-			<el-form :model="state.form">
-				<el-form-item prop="email">
-					<el-input v-model="state.form.Ip" placeholder="放大倍率"></el-input>
-				</el-form-item>
-			</el-form>
-		</div>
 	</div>
 </template>
 
@@ -88,19 +88,18 @@ const state = reactive({
 <style lang="css" scoped>
 .login-form {
 	width: 400px;
-	height: 220px;
+	height: 320px;
 	margin: 0 auto;
 	padding: 30px;
 	border-radius: 2px;
 	box-shadow: 3px 3px 10px 8px #f1f1f1;
 }
 
-.Output-form {
+.OutputBox {
 	width: 400px;
-	height: 160px;
+	height: 220px;
 	margin: 0 auto;
-	padding: 30px;
-  margin-top: 10px;
+	padding: 10px;
 	border-radius: 2px;
 	box-shadow: 3px 3px 10px 8px #f1f1f1;
 }

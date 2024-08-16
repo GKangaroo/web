@@ -14,7 +14,7 @@
         <template #title >
           <span class="custom-menu-item">攻击模拟</span>
         </template>
-        <el-menu-item index="2-1" class = "custom-menu-item-s">DNSSEC</el-menu-item>
+        <el-menu-item index="2-1" class = "custom-menu-item-s" @click="methods.menuItemClick('DNSSEC')">DNSSEC</el-menu-item>
         <el-menu-item index="2-2" class = "custom-menu-item-s" @click="methods.menuItemClick('IPv6')">IPv6</el-menu-item>
         <el-menu-item index="2-3" class = "custom-menu-item-s">DOH</el-menu-item>
         <el-menu-item index="2-3" class = "custom-menu-item-s">DOT</el-menu-item>

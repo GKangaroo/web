@@ -31,6 +31,16 @@ export const routes = [
                 path: '/Deny', 
                 name: 'Deny',
                 component: () => import('../views/IPv6/IPDeny.vue')
+            },
+            {
+                path: '/DNSSEC', 
+                name: 'DNSSEC',
+                component: () => import('../views/DNSSEC/DNSSECView.vue')
+            },
+            {
+                path: '/Poison', 
+                name: 'Poison',
+                component: () => import('../views/DNSSEC/DnssecPoison.vue')
             }
         ]
     }
