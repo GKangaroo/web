@@ -49,10 +49,22 @@ const state = reactive({
 		<div class="login-form">
 			<h1 class="title">Input</h1>
 			<el-form :model="state.form">
-				<el-form-item prop="email">
-					<br/><br/>
-					<el-input v-model="state.form.victim" placeholder="请输入Ipv6地址"></el-input>
-				</el-form-item>
+
+				<el-form :model="state.form" label-width="100px">
+					<el-form-item prop="email" label="目标IP">
+						<el-input v-model="state.form.Ip" placeholder="type domain"></el-input>
+					</el-form-item>
+					<el-form-item prop="email" label="目标域名">
+						<el-input v-model="state.form.Ip" placeholder="type resolver_Ip"></el-input>
+					</el-form-item>
+					<el-form-item prop="email" label="解析值">
+						<el-input v-model="state.form.Ip" placeholder="type attack_ip"></el-input>
+					</el-form-item>
+					<el-form-item prop="email" label="TTL">
+						<el-input v-model="state.form.Ip" placeholder="type attack_ttl"></el-input>
+					</el-form-item>
+				</el-form>
+
 				<el-radio-group v-model="state.form.mode">
 					<el-radio value="0">解析数据注入</el-radio>
 					<el-radio value="1">解析数据篡改</el-radio>
@@ -71,41 +83,25 @@ const state = reactive({
 		</div>
 	</div>
 
-	<el-scrollbar class="Output"> 
-        <el-form :inline="true" class="demo-form-inline">
-            <el-form-item >
-                <el-input 
-                    v-model="state.attackline" 
-                    placeholder="攻击输出" 
-                    clearable 
-					:rows="15"
-					:autosize="{ minRows: 15, maxRows: 15 }"
-					readonly="true"
-					class = "OutputBox"
-					type="textarea"
-                />
-            </el-form-item>
-            <el-form-item>
-                <el-input 
-                    v-model="state.effect" 
-                    placeholder="效果输出" 
-                    clearable 
-					:rows="15"
-					:autosize="{ minRows: 15, maxRows: 15 }"
-					readonly="true"
-					class = "OutputBox"
-					type="textarea"
-                />
-            </el-form-item>
-        </el-form>
-    </el-scrollbar>
+	<el-scrollbar class="Output">
+		<el-form :inline="true" class="demo-form-inline">
+			<el-form-item>
+				<el-input v-model="state.attackline" placeholder="攻击输出" clearable :rows="15"
+					:autosize="{ minRows: 15, maxRows: 15 }" readonly="true" class="OutputBox" type="textarea" />
+			</el-form-item>
+			<el-form-item>
+				<el-input v-model="state.effect" placeholder="效果输出" clearable :rows="15"
+					:autosize="{ minRows: 15, maxRows: 15 }" readonly="true" class="OutputBox" type="textarea" />
+			</el-form-item>
+		</el-form>
+	</el-scrollbar>
 </template>
 
 
 <style lang="css" scoped>
 .login-form {
-	width: 400px;
-	height: 270px;
+	width: 600px;
+	height: 400px;
 	margin: 0 auto;
 	padding: 30px;
 	border-radius: 2px;

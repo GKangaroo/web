@@ -15,7 +15,7 @@ export const routes = [
             {
                 path: '/Detection', 
                 name: 'Detection',
-                component: () => import('../views/AboutView.vue')
+                component: () => import('../views/DetailDetect/DetailDet.vue')
             },
             {
                 path: '/IPv6', 
