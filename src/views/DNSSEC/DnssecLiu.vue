@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { effect, onMounted, reactive } from 'vue';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-let IntervalId:number;
 const methods = {
 	Attack: async () => {
 		state.isAttacking = !state.isAttacking;
@@ -21,17 +20,9 @@ const methods = {
 			const response = await axios.get('/ipv6api/history');
 			state.attackline = response.data.join('');
 		};
-
-		if (!state.polling) {
-			IntervalId = setInterval(fetchUpdate, 1000);
-		} else {
-			const stopPolling = () => {
-				clearInterval(IntervalId);
-			};
-		}
 	},
 	GetEffect: async () => {
-		const { data } = await axios.get('/ipv6api/getresult');
+		const { data } = await axios.post('/dnssecapi/log');
 		state.effect = data
 	},
 	GetStatus: async () => {

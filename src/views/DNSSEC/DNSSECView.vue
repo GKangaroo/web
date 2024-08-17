@@ -1,7 +1,7 @@
 <template>
     <div class="button-container">
         <el-button type="primary" class="custom-button" @click="methods.menuItemClick('Poison')">第一种</el-button>
-        <el-button type="success" class="custom-button" @click="methods.menuItemClick('Deny')">其他？</el-button>
+        <el-button type="success" class="custom-button" @click="methods.menuItemClick('DnssecDeny')">其他？</el-button>
     </div>
 </template>
   

@@ -53,9 +53,14 @@ export const routes = [
                 component: () => import('../views/DNSSEC/DNSSECView.vue')
             },
             {
-                path: '/Poison', 
+                path: '/DNSSEC/Poison', 
                 name: 'Poison',
                 component: () => import('../views/DNSSEC/DnssecPoison.vue')
+            },
+            {
+                path: '/DNSSEC/Deny', 
+                name: 'DnssecDeny',
+                component: () => import('../views/DNSSEC/DnssecLiu.vue')
             }
         ]
     }
