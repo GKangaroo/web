@@ -1,7 +1,8 @@
 <template>
     <div class="button-container">
         <el-button type="primary" class="custom-button" @click="methods.menuItemClick('Poison')">第一种</el-button>
-        <el-button type="success" class="custom-button" @click="methods.menuItemClick('DnssecDeny')">其他？</el-button>
+        <el-button type="success" class="custom-button" @click="methods.menuItemClick('DnssecDeny')">DNSSEC解析器拒绝服务攻击</el-button>
+        <el-button type="warning" class="custom-button" @click="methods.menuItemClick('DnssecBypass')">DNSSEC加密机制绕过域名解析数据欺骗攻击</el-button>
     </div>
 </template>
   
@@ -28,10 +29,11 @@ const methods = {
 }
 
 .custom-button {
-    size: large;
-    /* 这里是伪代码，el-button 不支持直接在 CSS 中设置 size */
-    margin-right: 60px;
+    width: 300px;
+  
+
     /* 增加按钮之间的间距 */
+    margin-top: 20px;
 }
 
 /* 如果需要更改按钮的大小，可以使用以下方法 */

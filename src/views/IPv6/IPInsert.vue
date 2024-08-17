@@ -11,7 +11,7 @@ const methods = {
 			const { data } = await axios.post('/ipv6api/stop');
 			state.polling = false
 		} else {
-			state.buttonText = '继续攻击';
+			state.buttonText = '开始攻击';
 			state.buttonStyle.backgroundColor = '#409eff';
 			const { data } = await axios.post('/ipv6api/start', state.form);
 			state.polling = true
@@ -55,11 +55,17 @@ onMounted(async () => {
 interface UserForm {
 	victim: string;
 	mode: string;
+	domain: string;
+	ip: string;
+	ttl: string;
 }
 
 const state = reactive({
 	form: {
 		victim: '2001:250:200:7:d703:82e0:a74b:3c88',
+		domain: 'www.stanford.edu',
+		ip: '202.112.51.126',
+		ttl: '86400',
 		mode: '0',
 	} as UserForm,
     buttonText: '开始攻击',
@@ -74,12 +80,28 @@ const state = reactive({
 <template>
 	<div class="display-flex j-c-c a-i-c height100">
 		<div class="login-form">
-			<h1 class="title">请输入Ipv6地址和模式</h1>
+			<h1 class="title">请输入IPv6地址和模式</h1>
 			<el-form :model="state.form">
-				<el-form-item prop="email">
-					<br/><br/>
-					<el-input v-model="state.form.victim" placeholder="请输入Ipv6地址"></el-input>
+
+				<div>
+					<el-form :model="state.form" label-width="100px">
+				<el-form-item prop="email" label="IPv6地址">
+					<el-input v-model="state.form.victim" placeholder="请输入IPv6地址"></el-input>
 				</el-form-item>
+				<el-form-item prop="email" label="域名">
+					<el-input v-model="state.form.domain" placeholder="请输入域名"></el-input>
+				</el-form-item>
+				<el-form-item prop="email" label="IP">
+					<el-input v-model="state.form.ip" placeholder="请输入IP"></el-input>
+				</el-form-item>
+				<el-form-item prop="email" label="TTL">
+					<el-input v-model="state.form.ttl" placeholder="请输入TTL"></el-input>
+				</el-form-item>
+
+
+			</el-form>
+				</div>
+				
 				<el-radio-group v-model="state.form.mode">
 					<el-radio value="0">篡改模式</el-radio>
 					<el-radio value="1">注入模式</el-radio>
@@ -132,7 +154,7 @@ const state = reactive({
 <style lang="css" scoped>
 .login-form {
 	width: 400px;
-	height: 270px;
+	height: 370px;
 	margin: 0 auto;
 	padding: 30px;
 	border-radius: 2px;

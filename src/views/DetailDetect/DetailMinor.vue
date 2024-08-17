@@ -67,32 +67,29 @@ const state = reactive({
 <template>
 	<div class="display-flex j-c-c a-i-c height100">
 		<div class="login-form">
-			<h1 class="title">IP输入</h1>
+			<h1 class="title">域名输入</h1>
 			<el-form :model="state.form">
-				<el-form-item prop="email" label="攻击的IPv6地址">
-					<el-input v-model="state.form.victim" placeholder="请输入IPv6地址"></el-input>
+				<el-form-item prop="email" label="探测的玉米">
+					<el-input v-model="state.form.victim" placeholder="请输入域名"></el-input>
 				</el-form-item>
-				
-				<el-radio-group v-model="state.form.mod">
-					<el-radio value="ipv6">IPv6模式</el-radio>
-					<el-radio value="doh">DoH模式</el-radio>
-					<el-radio value="dot">DoT模式</el-radio>
-				</el-radio-group>
 
 				<el-form-item class="button-container">
 					<el-button class="Mybutton" type="primary" @click="methods.onSubmit"
 						:style="{ backgroundColor: state.buttonStyle.backgroundColor }">
-						{{ state.buttonText }}
+						开始探测
 					</el-button>
 				</el-form-item>
 			</el-form>
 		</div>
 
     <div class="Output-form">
-			<h1 class="title">攻击效果</h1>
+			<h1 class="title">探测结果</h1>
 			<el-form :model="state.form">
-				<el-form-item prop="email">
-					<el-input v-model="state.amp" placeholder="放大倍率"></el-input>
+				<el-form-item prop="email" label="主权威服务器">
+					<el-input v-model="state.form.Ip" placeholder=""></el-input>
+				</el-form-item>
+				<el-form-item prop="email" label="辅权威服务器">
+					<el-input v-model="state.form.Ip" placeholder=""></el-input>
 				</el-form-item>
 			</el-form>
 		</div>
@@ -103,7 +100,7 @@ const state = reactive({
 <style lang="css" scoped>
 .login-form {
 	width: 400px;
-	height: 220px;
+	height: 180px;
 	margin: 0 auto;
 	padding: 30px;
 	border-radius: 2px;
@@ -112,7 +109,7 @@ const state = reactive({
 
 .Output-form {
 	width: 400px;
-	height: 160px;
+	height: 200px;
 	margin: 0 auto;
 	padding: 30px;
   margin-top: 10px;

@@ -52,16 +52,16 @@ const state = reactive({
 
 				<el-form :model="state.form" label-width="100px">
 					<el-form-item prop="email" label="目标IP">
-						<el-input v-model="state.form.Ip" placeholder="type domain"></el-input>
+						<el-input v-model="state.form.victim" placeholder="type domain"></el-input>
 					</el-form-item>
 					<el-form-item prop="email" label="目标域名">
-						<el-input v-model="state.form.Ip" placeholder="type resolver_Ip"></el-input>
+						<el-input v-model="state.form.victim" placeholder="type resolver_Ip"></el-input>
 					</el-form-item>
 					<el-form-item prop="email" label="解析值">
-						<el-input v-model="state.form.Ip" placeholder="type attack_ip"></el-input>
+						<el-input v-model="state.form.victim" placeholder="type attack_ip"></el-input>
 					</el-form-item>
 					<el-form-item prop="email" label="TTL">
-						<el-input v-model="state.form.Ip" placeholder="type attack_ttl"></el-input>
+						<el-input v-model="state.form.victim" placeholder="type attack_ttl"></el-input>
 					</el-form-item>
 				</el-form>
 
@@ -71,7 +71,7 @@ const state = reactive({
 				</el-radio-group>
 
 				<el-form-item class="button-container">
-					<el-button class="Mybutton" type="primary" @click="methods.Attack"
+					<el-button class="Mybutton" type="primary" @click="methods.GetEffect"
 						:style="{ backgroundColor: state.buttonStyle.backgroundColor }">
 						{{ state.buttonText }}
 					</el-button>

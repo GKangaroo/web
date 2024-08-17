@@ -15,7 +15,17 @@ export const routes = [
             {
                 path: '/Detection', 
                 name: 'Detection',
-                component: () => import('../views/DetailDetect/DetailDet.vue')
+                component: () => import('../views/DetailDetect/DetailView.vue')
+            },
+            {
+                path: '/Detection/Major', 
+                name: 'DetectionMajor',
+                component: () => import('../views/DetailDetect/DetailMajor.vue')
+            },
+            {
+                path: '/Detection/Minor', 
+                name: 'DetectionMinor',
+                component: () => import('../views/DetailDetect/DetailMinor.vue')
             },
             {
                 path: '/IPv6', 
@@ -58,10 +68,20 @@ export const routes = [
                 component: () => import('../views/DNSSEC/DnssecPoison.vue')
             },
             {
+                path: '/DNSSEC/Bypass', 
+                name: 'DnssecBypass',
+                component: () => import('../views/DNSSEC/DnssecBypass.vue')
+            },
+            {
                 path: '/DNSSEC/Deny', 
                 name: 'DnssecDeny',
-                component: () => import('../views/DNSSEC/DnssecLiu.vue')
+                component: () => import('../views/DNSSEC/DnssecDeny.vue')
             }
+            // {
+            //     path: '/DNSSEC/Deny', 
+            //     name: 'DnssecDeny',
+            //     component: () => import('../views/DNSSEC/DnssecLiu.vue')
+            // }
         ]
     }
 ];
