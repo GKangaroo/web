@@ -3,49 +3,23 @@ import { onMounted, reactive } from 'vue';
 import axios from 'axios';
 const methods = {
 	onSubmit: async () => {
-		const fetchUpdate = async () => {
-			const response = await axios.get('/ipv6api2/amp');
-			state.amp = response.data.join('');
-		};
+		// const fetchUpdate = async () => {
+		// 	const response = await axios.get('/iPv6api2/amp');
+		// 	//state.amp = response.data.join('');
+		// };
 
-		setInterval(fetchUpdate, 1000);
+		// setInterval(fetchUpdate, 1000);
 
 		state.isAttacking = !state.isAttacking;
         if (state.isAttacking) {
             state.buttonText = '停止攻击';
             state.buttonStyle.backgroundColor = 'red';
-			const { data } = await axios.post('/ipv6api2/start', state.form);
+			const { data } = await axios.post('/iPv6api2/start', state.form);
         } else {
             state.buttonText = '继续攻击';
             state.buttonStyle.backgroundColor = 'blue';
-			const { data } = await axios.post('/ipv6api2/stop');
+			const { data } = await axios.post('/iPv6api2/stop');
 		}
-		
-
-		// const { data } = await axios.post('/api/auth/login/', state.form);
-		// if (data.code != 200) {
-		// 	ElMessage({
-		// 		message: data.data.message,
-		// 		type: 'error'
-		// 	});
-		// } else {
-		// 	ElMessage({
-		// 		type: 'success',
-		// 		message: 'login succeeded',
-		// 		onClose: () => {
-		// 			setLoginStorage(data);
-		// 			updateNotificationItem(NOTIFICATION_USAGE_TIP, true);
-		// 			const redirect = router.currentRoute.value.query.redirect;
-		// 			if (redirect) {
-		// 				router.push(redirect as string);
-		// 			} else {
-		// 				router.push({
-		// 					name: 'Upload'
-		// 				});
-		// 			}
-		// 		}
-		// 	});
-		// }
 	}
 };
 

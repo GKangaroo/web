@@ -3,18 +3,20 @@ module.exports = defineConfig({
   transpileDependencies: true,
   devServer: {
     open: true,
-		// disableHostCheck: true,
+		historyApiFallback: true,
+    allowedHosts: "all",
     proxy: {
+      '/iPv6api2': {
+                target: 'http://192.168.117.143:9870',
+                changeOrigin: true,
+                pathRewrite: { '^/iPv6api2': '' },
+            },
 			'/ipv6api': {
                 target: 'http://202.112.51.127:9870',
                 changeOrigin: true,
                 pathRewrite: { '^/ipv6api': '' },
             },
-      '/ipv6api2': {
-                target: 'http://192.168.117.143:9870',
-                changeOrigin: true,
-                pathRewrite: { '^/ipv6api2': '' },
-            },
+      
       // '/dnssecapi': {
       //           target: 'http://192.168.2.16:9870',
       //           changeOrigin: true,
