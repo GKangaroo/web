@@ -10,7 +10,7 @@ module.exports = defineConfig({
                 changeOrigin: true,
                 pathRewrite: { '^/ipv6api': '' },
             },
-      '/ipv6api': {
+      '/ipv6api2': {
                 target: 'http://192.168.117.143:9870',
                 changeOrigin: true,
                 pathRewrite: { '^/ipv6api2': '' },

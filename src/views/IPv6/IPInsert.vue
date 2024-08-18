@@ -5,16 +5,16 @@ let IntervalId:number;
 const methods = {
 	Attack: async () => {
 		state.isAttacking = !state.isAttacking;
-		if (state.isAttacking) {
-			state.buttonText = '停止攻击';
-			state.buttonStyle.backgroundColor = 'red';
-			const { data } = await axios.post('/ipv6api/stop');
-			state.polling = false
-		} else {
+		if (!state.isAttacking) {
 			state.buttonText = '开始攻击';
 			state.buttonStyle.backgroundColor = '#409eff';
+			const { data } = await axios.post('/ipv6api/stop');
+			state.polling = true;
+		} else {
+			state.buttonText = '停止攻击';
+			state.buttonStyle.backgroundColor = 'red';
 			const { data } = await axios.post('/ipv6api/start', state.form);
-			state.polling = true
+			state.polling = false;
 		}
 
 		const fetchUpdate = async () => {
@@ -46,9 +46,12 @@ onMounted(async () => {
 
 	if(data == 2 || data == 0 || data == 3){
 		//呵呵
+		
 	}else{
+		//呵呵
 		state.buttonText = '停止攻击';
 		state.buttonStyle.backgroundColor = 'red';
+		state.isAttacking = true;
 	}
 });
 
@@ -103,8 +106,8 @@ const state = reactive({
 				</div>
 				
 				<el-radio-group v-model="state.form.mode">
-					<el-radio value="0">篡改模式</el-radio>
-					<el-radio value="1">注入模式</el-radio>
+					<el-radio value="0" v-model="state.form.mode">篡改模式</el-radio>
+					<el-radio value="1" v-model="state.form.mode">注入模式</el-radio>
 				</el-radio-group>
 
 				<el-form-item class="button-container">
