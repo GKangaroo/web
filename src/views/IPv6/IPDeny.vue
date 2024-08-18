@@ -14,7 +14,7 @@ const methods = {
         if (state.isAttacking) {
             state.buttonText = '停止攻击';
             state.buttonStyle.backgroundColor = 'red';
-			const { data } = await axios.post('/iPv6api2/start', state.form);
+			const { data } = await axios.post('/iPv6api2/start?victim=' + state.form.victim + '&mod=' + state.form.mod);
         } else {
             state.buttonText = '继续攻击';
             state.buttonStyle.backgroundColor = 'blue';
