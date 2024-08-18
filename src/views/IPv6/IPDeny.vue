@@ -3,22 +3,24 @@ import { onMounted, reactive } from 'vue';
 import axios from 'axios';
 const methods = {
 	onSubmit: async () => {
-		state.isAttacking = !state.isAttacking;
-        if (state.isAttacking) {
-            state.buttonText = '停止攻击';
-            state.buttonStyle.backgroundColor = 'red';
-			const { data } = await axios.post('/ipv6api2/stop');
-        } else {
-            state.buttonText = '继续攻击';
-            state.buttonStyle.backgroundColor = 'blue';
-			const { data } = await axios.post('/ipv6api2/start', state.form);
-		}
 		const fetchUpdate = async () => {
 			const response = await axios.get('/ipv6api2/amp');
 			state.amp = response.data.join('');
 		};
 
 		setInterval(fetchUpdate, 1000);
+
+		state.isAttacking = !state.isAttacking;
+        if (state.isAttacking) {
+            state.buttonText = '停止攻击';
+            state.buttonStyle.backgroundColor = 'red';
+			const { data } = await axios.post('/ipv6api2/start', state.form);
+        } else {
+            state.buttonText = '继续攻击';
+            state.buttonStyle.backgroundColor = 'blue';
+			const { data } = await axios.post('/ipv6api2/stop');
+		}
+		
 
 		// const { data } = await axios.post('/api/auth/login/', state.form);
 		// if (data.code != 200) {

@@ -15,11 +15,11 @@ module.exports = defineConfig({
                 changeOrigin: true,
                 pathRewrite: { '^/ipv6api2': '' },
             },
-      '/dnssecapi': {
-                target: 'http://192.168.2.16:9870',
-                changeOrigin: true,
-                pathRewrite: { '^/dnssecapi': '' },
-            },
+      // '/dnssecapi': {
+      //           target: 'http://192.168.2.16:9870',
+      //           changeOrigin: true,
+      //           pathRewrite: { '^/dnssecapi': '' },
+      //       },
 		},
     port: 3030
   },
