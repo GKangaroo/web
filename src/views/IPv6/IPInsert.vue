@@ -13,13 +13,8 @@ const methods = {
 		} else {
 			state.buttonText = '停止攻击';
 			state.buttonStyle.backgroundColor = 'red';
-			const { data } = await axios.post('/ipv6api/start', {
-				victim: state.form.victim,
-	mode: state.form.mode,
-	domain: state.form.domain,
-	ip: state.form.ip,
-	ttl: state.form.ttl,
-	});
+			const { data } = await axios.post('/ipv6api/start?victim=' + state.form.victim + '&mode=' + state.form.mode + '&domain=' + state.form.domain + '&ip=' + state.form.ip + '&ttl=' + state.form.ttl
+			);
 			state.polling = false;
 		}
 

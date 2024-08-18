@@ -3,12 +3,12 @@ import { onMounted, reactive } from 'vue';
 import axios from 'axios';
 const methods = {
 	onSubmit: async () => {
-		// const fetchUpdate = async () => {
-		// 	const response = await axios.get('/iPv6api2/amp');
-		// 	//state.amp = response.data.join('');
-		// };
+		const fetchUpdate = async () => {
+			const response = await axios.get('/iPv6api2/amp');
+			state.amp = response.data;
+		};
 
-		// setInterval(fetchUpdate, 1000);
+		setInterval(fetchUpdate, 1000);
 
 		state.isAttacking = !state.isAttacking;
         if (state.isAttacking) {
