@@ -54,7 +54,7 @@ interface UserForm {
 
 const state = reactive({
 	form: {
-		victim: 'fd00::141',
+		victim: 'baidu.com',
 		mod: 'ipv6',
 	} as UserForm,
     buttonText: '开始攻击',
@@ -69,7 +69,7 @@ const state = reactive({
 		<div class="login-form">
 			<h1 class="title">域名输入</h1>
 			<el-form :model="state.form">
-				<el-form-item prop="email" label="探测的玉米">
+				<el-form-item prop="email" label="探测的域名">
 					<el-input v-model="state.form.victim" placeholder="请输入域名"></el-input>
 				</el-form-item>
 
@@ -86,10 +86,10 @@ const state = reactive({
 			<h1 class="title">探测结果</h1>
 			<el-form :model="state.form">
 				<el-form-item prop="email" label="主权威服务器">
-					<el-input v-model="state.form.Ip" placeholder=""></el-input>
+					<el-input v-model="state.form.Ip" placeholder="" disabled></el-input>
 				</el-form-item>
 				<el-form-item prop="email" label="辅权威服务器">
-					<el-input v-model="state.form.Ip" placeholder=""></el-input>
+					<el-input v-model="state.form.Ip" placeholder="" disabled></el-input>
 				</el-form-item>
 			</el-form>
 		</div>

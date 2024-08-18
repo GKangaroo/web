@@ -5,10 +5,10 @@ const methods = {
 	onSubmit: async () => {
 		const fetchUpdate = async () => {
 			const response = await axios.get('/iPv6api2/amp');
-			state.amp = response.data;
+			state.amp = response.data.desc;
 		};
 
-		setInterval(fetchUpdate, 1000);
+		setInterval(fetchUpdate, 1500);
 
 		state.isAttacking = !state.isAttacking;
         if (state.isAttacking) {

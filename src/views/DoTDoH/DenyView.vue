@@ -32,7 +32,7 @@ interface UserForm {
 
 const state = reactive({
 	form: {
-		victim: '2001:250:200:7:d703:82e0:a74b:3c88',
+		victim: '192.168.2.3',
 		mode: '0',
 	} as UserForm,
     buttonText: '开始攻击',
@@ -47,58 +47,39 @@ const state = reactive({
 <template>
 	<div class="display-flex j-c-c a-i-c height100">
 		<div class="login-form">
-			<h1 class="title">请输入Ip地址和模式</h1>
+			<h1 class="title">请输入目标攻击IP地址</h1>
 			<el-form :model="state.form">
 				<el-form-item prop="email">
-					<br/><br/>
+					<br /><br />
 					<el-input v-model="state.form.victim" placeholder="请输入Ip地址"></el-input>
 				</el-form-item>
-				<el-radio-group v-model="state.form.mode">
-					<el-radio value="0">协议降级及绕过</el-radio>
-					<el-radio value="1">拒绝服务</el-radio>
-				</el-radio-group>
 
 				<el-form-item class="button-container">
 					<el-button class="Mybutton" type="primary" @click="methods.Attack"
 						:style="{ backgroundColor: state.buttonStyle.backgroundColor }">
 						{{ state.buttonText }}
 					</el-button>
-					<el-button class="Mybutton" type="primary" @click="methods.GetEffect">
+					<!-- <el-button class="Mybutton" type="primary" @click="methods.GetEffect">
 						更新效果
-					</el-button>
+					</el-button> -->
 				</el-form-item>
 			</el-form>
 		</div>
 	</div>
 
-	<el-scrollbar class="Output"> 
-        <el-form :inline="true" class="demo-form-inline">
-            <el-form-item >
-                <el-input 
-                    v-model="state.attackline" 
-                    placeholder="攻击输出" 
-                    clearable 
-					:rows="15"
-					:autosize="{ minRows: 15, maxRows: 15 }"
-					readonly="true"
-					class = "OutputBox"
-					type="textarea"
-                />
-            </el-form-item>
-            <el-form-item>
-                <el-input 
-                    v-model="state.effect" 
-                    placeholder="效果输出" 
-                    clearable 
-					:rows="15"
-					:autosize="{ minRows: 15, maxRows: 15 }"
-					readonly="true"
-					class = "OutputBox"
-					type="textarea"
-                />
-            </el-form-item>
-        </el-form>
-    </el-scrollbar>
+	<el-form>
+		<div class="card-container">
+			<el-card class="box-card">
+				<template #header>
+					<div class="card-header">
+						<span>被攻击的页面此时的状况</span>
+					</div>
+				</template>
+				<iframe src="https://www.runoob.com" width="350"
+				height="300"></iframe>
+			</el-card>
+		</div>
+	</el-form>
 </template>
 
 
@@ -140,9 +121,26 @@ const state = reactive({
 	
 }
 
+.card-container {
+    display: flex; /* 使用 Flexbox 布局 */
+    justify-content: center; /* 水平居中对齐 */
+    gap: 20px; /* 设置卡片之间的间距 */
+    margin-top: 20px; /* 为卡片容器增加上边距 */
+}
+
 .button-container {
   margin-top: 20px; /* 增加按钮与上方的距离 */
   text-align: center; /* 使按钮居中对齐 */
 }
+
+.box-card {
+  width: 100%;
+  height: 400px;
+  max-width: 420px;
+  margin-top: 20px;
+
+  padding: 20px;
+}
+
 
 </style>

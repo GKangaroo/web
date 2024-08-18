@@ -26,14 +26,18 @@ onMounted(async () => {
 });
 
 interface UserForm {
-	victim: string;
-	mode: string;
+	target_ip: string;
+	target_domain: string;
+	injection_value: string;
+	ttl: number;
 }
 
 const state = reactive({
 	form: {
-		victim: '2001:250:200:7:d703:82e0:a74b:3c88',
-		mode: '0',
+		target_ip: '192.168.1.10',
+		target_domain: 'example.com',
+		injection_value: '10.0.0.1',
+		ttl: 300
 	} as UserForm,
     buttonText: '开始攻击',
 	buttonStyle: { backgroundColor: ''},
@@ -52,16 +56,16 @@ const state = reactive({
 
 				<el-form :model="state.form" label-width="100px">
 					<el-form-item prop="email" label="目标IP">
-						<el-input v-model="state.form.victim" placeholder="type domain"></el-input>
+						<el-input v-model="state.form.target_ip" placeholder="type domain"></el-input>
 					</el-form-item>
 					<el-form-item prop="email" label="目标域名">
-						<el-input v-model="state.form.victim" placeholder="type resolver_Ip"></el-input>
+						<el-input v-model="state.form.target_domain" placeholder="type resolver_Ip"></el-input>
 					</el-form-item>
-					<el-form-item prop="email" label="解析值">
-						<el-input v-model="state.form.victim" placeholder="type attack_ip"></el-input>
+					<el-form-item prop="email" label="注入IP">
+						<el-input v-model="state.form.injection_value" placeholder="type attack_ip"></el-input>
 					</el-form-item>
 					<el-form-item prop="email" label="TTL">
-						<el-input v-model="state.form.victim" placeholder="type attack_ttl"></el-input>
+						<el-input v-model="state.form.ttl" placeholder="type attack_ttl"></el-input>
 					</el-form-item>
 				</el-form>
 

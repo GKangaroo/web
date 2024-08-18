@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, reactive,ref } from 'vue';
 
-const cities = ['http_fp', 'system_fp', 'dot', 'doh', 'ipv6_support', 'response_validation', '0x20', 'port_rand', '任播（未完成）','version_bind']
+const cities = ['服务器HTTP指纹', '服务器系统指纹', '是否支持DOT', '是否支持DOH', '是否支持IPv6', '是否支持DNSSEC', '是否支持0x20', '源端口随机化情况', '任播（未完成）','DNS软件版本']
 const checkboxGroup2 = ref(['Shanghai'])
 const methods = {
 	onSubmit: async () => {
@@ -35,7 +35,7 @@ const state = reactive({
 <template>
     <div class="display-flex j-c-c a-i-c height100">
         <div class="login-form">
-            <h1 class="title">Input</h1>
+            <h1 class="title">IP输入</h1>
 
             <div class="demo-button-style">
                 <el-checkbox-group v-model="checkboxGroup2">
@@ -55,7 +55,7 @@ const state = reactive({
             <el-form-item class="button-container">
                 <el-button class="Mybutton" type="primary" @click="methods.onSubmit"
                     :style="{ backgroundColor: state.buttonStyle.backgroundColor }">
-                    全选
+                    全    选
                 </el-button>
                 <el-button class="Mybutton" type="primary" @click="methods.onSubmit"
                     :style="{ backgroundColor: state.buttonStyle.backgroundColor }">
@@ -67,39 +67,36 @@ const state = reactive({
     <div class="display-flex j-c-c a-i-c height100">
         <h1 class="title"></h1>
         <el-scrollbar class="output-form">
-            <h1 class="title">攻击效果</h1>
-            <el-form :model="state.form" label-width="120px">
-                <el-form-item prop="email" label="http_fp">
+            <h1 class="title">探测结果</h1>
+            <el-form :model="state.form" label-width="140px">
+                <el-form-item prop="email" label="服务器HTTP指纹">
                     <el-input v-model="state.form.Ip" ></el-input>
                 </el-form-item>
-                <el-form-item prop="email" label="system_fp">
+                <el-form-item prop="email" label="服务器系统指纹">
                     <el-input v-model="state.form.Ip" ></el-input>
                 </el-form-item>
-                <el-form-item prop="email" label="dot">
+                <el-form-item prop="email" label="是否支持DOT">
                     <el-input v-model="state.form.Ip" ></el-input>
                 </el-form-item>
-                <el-form-item prop="email" label="doh">
+                <el-form-item prop="email" label="是否支持DOH">
                     <el-input v-model="state.form.Ip" ></el-input>
                 </el-form-item>
-                <el-form-item prop="email" label="ipv6_support">
+                <el-form-item prop="email" label="是否支持IPv6">
                     <el-input v-model="state.form.Ip" ></el-input>
                 </el-form-item>
-                <el-form-item prop="email" label="response_validation">
+                <el-form-item prop="email" label="是否支持DNSSEC">
                     <el-input v-model="state.form.Ip" ></el-input>
                 </el-form-item>
-                <el-form-item prop="email" label="0x20">
+                <el-form-item prop="email" label="是否支持0x20">
                     <el-input v-model="state.form.Ip" ></el-input>
                 </el-form-item>
-                <el-form-item prop="email" label="port_rand">
+                <el-form-item prop="email" label="源端口随机化情况">
                     <el-input v-model="state.form.Ip" ></el-input>
                 </el-form-item>
-                <el-form-item prop="email" label="port_rand">
+                <el-form-item prop="email" label="端口随机化情况">
                     <el-input v-model="state.form.Ip" ></el-input>
                 </el-form-item>
-                <el-form-item prop="email" label="任播（未完成）">
-                    <el-input v-model="state.form.Ip" ></el-input>
-                </el-form-item>
-                <el-form-item prop="email" label="version_bind">
+                <el-form-item prop="email" label="DNS软件版本">
                     <el-input v-model="state.form.Ip" ></el-input>
                 </el-form-item>
             </el-form>
@@ -120,7 +117,7 @@ const state = reactive({
 
 .output-form {
 	width: 800px;
-	height: 670px;
+	height: 570px;
     margin-top: 40px;
 	margin: 0 auto;
 	padding: 100px;

@@ -3,47 +3,13 @@ import { onMounted, reactive } from 'vue';
 import axios from 'axios';
 const methods = {
 	onSubmit: async () => {
-		state.isAttacking = !state.isAttacking;
-        if (state.isAttacking) {
-            state.buttonText = '停止攻击';
-            state.buttonStyle.backgroundColor = 'red';
-			const { data } = await axios.post('/ipv6api2/stop');
-        } else {
-            state.buttonText = '继续攻击';
-            state.buttonStyle.backgroundColor = 'blue';
-			const { data } = await axios.post('/ipv6api2/start', state.form);
-		}
+        const { data } = await axios.post('/liushimingApi1/attack', {ip:state.ip});
 		const fetchUpdate = async () => {
-			const response = await axios.get('/ipv6api2/amp');
-			state.amp = response.data.join('');
+			const response = await axios.post('/liushimingApi1/log', state.logForm);
+			console.log(response)
 		};
 
 		setInterval(fetchUpdate, 1000);
-
-		// const { data } = await axios.post('/api/auth/login/', state.form);
-		// if (data.code != 200) {
-		// 	ElMessage({
-		// 		message: data.data.message,
-		// 		type: 'error'
-		// 	});
-		// } else {
-		// 	ElMessage({
-		// 		type: 'success',
-		// 		message: 'login succeeded',
-		// 		onClose: () => {
-		// 			setLoginStorage(data);
-		// 			updateNotificationItem(NOTIFICATION_USAGE_TIP, true);
-		// 			const redirect = router.currentRoute.value.query.redirect;
-		// 			if (redirect) {
-		// 				router.push(redirect as string);
-		// 			} else {
-		// 				router.push({
-		// 					name: 'Upload'
-		// 				});
-		// 			}
-		// 		}
-		// 	});
-		// }
 	}
 };
 
@@ -52,15 +18,19 @@ interface UserForm {
 	mod: string;
 }
 
+interface Form2{
+	ip: string;
+	log:string;
+}
+
 const state = reactive({
-	form: {
+	logForm: {
 		victim: '192.168.2.25',
 		mod: 'ipv6',
 	} as UserForm,
     buttonText: '开始攻击',
-	buttonStyle: { backgroundColor: ''},
-	isAttacking: false,
-	amp:""
+	ip: '192.168.2.25',
+	result: '',
 });
 </script>
 
@@ -68,26 +38,24 @@ const state = reactive({
 	<div class="display-flex j-c-c a-i-c height100">
 		<div class="login-form">
 			<h1 class="title">IP输入</h1>
-			<el-form :model="state.form">
+			<el-form>
 				<el-form-item prop="email" label="攻击的IP地址">
-					<el-input v-model="state.form.victim" placeholder="请输入IPv6地址"></el-input>
+					<el-input v-model="state.ip" placeholder="请输入IPv6地址"></el-input>
 				</el-form-item>
 
 				<el-form-item class="button-container">
-					<el-button class="Mybutton" type="primary" @click="methods.onSubmit"
-						:style="{ backgroundColor: state.buttonStyle.backgroundColor }">
+					<el-button class="Mybutton" type="primary" @click="methods.onSubmit">
 						{{ state.buttonText }}
 					</el-button>
 				</el-form-item>
 			</el-form>
 		</div>
 
-    <div class="Output-form">
+		<div class="Output-form">
 			<h1 class="title">攻击效果</h1>
-			<el-form :model="state.form">
-				<el-form-item prop="email">
-					<el-input v-model="state.amp" class="Output"></el-input>
-				</el-form-item>
+			<el-form>
+				<el-input v-model="state.result" clearable :rows="15" :autosize="{ minRows: 13, maxRows: 13 }"
+					readonly="true" class="OutputBox" type="textarea" />
 			</el-form>
 		</div>
 	</div>

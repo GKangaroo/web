@@ -2,48 +2,17 @@
 import { onMounted, reactive } from 'vue';
 import axios from 'axios';
 const methods = {
-	onSubmit: async () => {
-		state.isAttacking = !state.isAttacking;
-        if (state.isAttacking) {
-            state.buttonText = '停止攻击';
-            state.buttonStyle.backgroundColor = 'red';
-			const { data } = await axios.post('/ipv6api2/stop');
-        } else {
-            state.buttonText = '继续攻击';
-            state.buttonStyle.backgroundColor = 'blue';
-			const { data } = await axios.post('/ipv6api2/start', state.form);
-		}
-		const fetchUpdate = async () => {
-			const response = await axios.get('/ipv6api2/amp');
-			state.amp = response.data.join('');
-		};
+	test: async () => {
+		const {data} = await axios.post('/liushimingApi2/test');
+        if(data.code == 200){
+            //
+            state.isSuppot = "支持DNSSEC";
+        }else{
+            state.isSuppot = "不支持DNSSEC";
+        }
 
-		setInterval(fetchUpdate, 1000);
-
-		// const { data } = await axios.post('/api/auth/login/', state.form);
-		// if (data.code != 200) {
-		// 	ElMessage({
-		// 		message: data.data.message,
-		// 		type: 'error'
-		// 	});
-		// } else {
-		// 	ElMessage({
-		// 		type: 'success',
-		// 		message: 'login succeeded',
-		// 		onClose: () => {
-		// 			setLoginStorage(data);
-		// 			updateNotificationItem(NOTIFICATION_USAGE_TIP, true);
-		// 			const redirect = router.currentRoute.value.query.redirect;
-		// 			if (redirect) {
-		// 				router.push(redirect as string);
-		// 			} else {
-		// 				router.push({
-		// 					name: 'Upload'
-		// 				});
-		// 			}
-		// 		}
-		// 	});
-		// }
+        // const {data} = await axios.post('/liushimingApi2/test');
+        // state.externalHtmlBefore=data.data
 	}
 };
 
@@ -59,9 +28,10 @@ const state = reactive({
 	} as UserForm,
     buttonText: '开始攻击',
 	buttonStyle: { backgroundColor: ''},
-    isAttacking: false,
+    isSuppot: '',
     amp: "",
-    externalHtml: '<!DOCTYPE html>< html ><head><title>Hello, world!</ title ></head> </html>'
+    externalHtmlBefore: '<!DOCTYPE html>< html ><head><title>Hello, world!</ title ></head> </html>',
+    externalHtmlAfter: ''
 });
 </script>
 
@@ -75,7 +45,7 @@ const state = reactive({
                 </el-form-item>
 
                 <el-form-item class="button-container">
-                    <el-button class="Mybutton" type="primary" @click="methods.onSubmit"
+                    <el-button class="Mybutton" type="primary" @click="methods.test"
                         :style="{ backgroundColor: state.buttonStyle.backgroundColor }">
                         检测DNSSEC
                     </el-button>
@@ -107,7 +77,7 @@ const state = reactive({
                     <span>攻击前</span>
                 </div>
             </template>
-            <div v-html="state.externalHtml"></div>
+            <div v-html="state.externalHtmlBefore"></div>
         </el-card>
         <el-card class="box-card">
             <template #header>
@@ -115,7 +85,7 @@ const state = reactive({
                     <span>攻击后</span>
                 </div>
             </template>
-            <div v-html="state.externalHtml"></div>
+            <div v-html="state.externalHtmlAfter"></div>
         </el-card>
     </div>
 </template>

@@ -16,12 +16,21 @@ module.exports = defineConfig({
                 changeOrigin: true,
                 pathRewrite: { '^/ipv6api': '' },
             },
-      
-      // '/dnssecapi': {
-      //           target: 'http://192.168.2.16:9870',
-      //           changeOrigin: true,
-      //           pathRewrite: { '^/dnssecapi': '' },
-      //       },
+      '/liushimingApi1': {
+                target: 'http://192.168.2.16:5000',
+                changeOrigin: true,
+                pathRewrite: { '^/liushimingApi1': '' },
+            },
+      '/liushimingApi2': {
+                target: 'http://192.168.2.29:5000',
+                changeOrigin: true,
+                pathRewrite: { '^/liushimingApi2': '' },
+            },
+      '/cuishiboApi1': {
+                target: 'http://192.168.2.3:5000',
+                changeOrigin: true,
+                pathRewrite: { '^/cuishiboApi1': '' },
+            },
 		},
     port: 3030
   },

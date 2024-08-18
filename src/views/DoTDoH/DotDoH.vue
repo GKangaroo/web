@@ -1,6 +1,6 @@
 <template>
   <div class="button-container">
-    <el-button type="primary" class="custom-button" @click="methods.menuItemClick('DoHInsert')">协议降级及绕过/拒绝服务</el-button>
+    <el-button type="primary" class="custom-button" @click="methods.menuItemClick('DoHInsert')">协议降级及绕过</el-button>
     <el-button type="success" class="custom-button" @click="methods.menuItemClick('DoHDeny')">解析数据注入与篡改</el-button>
   </div>
 </template>
