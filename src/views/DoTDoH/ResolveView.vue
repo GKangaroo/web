@@ -7,8 +7,8 @@ const methods = {
 		const { data } = await axios.get('/ipv6api/getresult');
 		state.effect = data
 	},
-	GetStatus: async () => {
-		const { data } = await axios.get('/ipv6api/status');
+	attack: async () => {
+		const { data } = await axios.post('/cuishiboApi2/api/dns-data-injection',state.form);
 		state.effect = data
 	}
 };
@@ -51,11 +51,11 @@ const state = reactive({
 <template>
 	<div class="display-flex j-c-c a-i-c height100">
 		<div class="login-form">
-			<h1 class="title">Input</h1>
+			<h1 class="title">输入</h1>
 			<el-form :model="state.form">
 
 				<el-form :model="state.form" label-width="100px">
-					<el-form-item prop="email" label="目标IP">
+					<el-form-item prop="email" label="目标攻击IP">
 						<el-input v-model="state.form.target_ip" placeholder="type domain"></el-input>
 					</el-form-item>
 					<el-form-item prop="email" label="目标域名">
@@ -75,7 +75,7 @@ const state = reactive({
 				</el-radio-group>
 
 				<el-form-item class="button-container">
-					<el-button class="Mybutton" type="primary" @click="methods.GetEffect"
+					<el-button class="Mybutton" type="primary" @click="methods.attack"
 						:style="{ backgroundColor: state.buttonStyle.backgroundColor }">
 						{{ state.buttonText }}
 					</el-button>

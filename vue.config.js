@@ -31,6 +31,11 @@ module.exports = defineConfig({
                 changeOrigin: true,
                 pathRewrite: { '^/cuishiboApi1': '' },
             },
+      '/cuishiboApi2': {
+                target: 'http://192.168.2.2:5000',
+                changeOrigin: true,
+                pathRewrite: { '^/cuishiboApi2': '' },
+            },
 		},
     port: 3030
   },
