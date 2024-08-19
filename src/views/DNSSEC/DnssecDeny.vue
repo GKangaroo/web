@@ -1,36 +1,55 @@
 <script setup lang="ts">
 import { onMounted, reactive } from 'vue';
 import axios from 'axios';
+
 const methods = {
+	ticker:1,
+
 	onSubmit: async () => {
+		state.isButtonDisabled=true
+		const prefunc = async () => {
+			const response = await axios.post('/liushimingApi1/log', state.logForm);
+			state.result+="攻击前目标服务器的丢包率："+response.data.rate*100+'%\n';
+		};
+		await prefunc()
+
         const { data } = await axios.post('/liushimingApi1/attack', {ip:state.ip});
+		state.result+="设置目标解析器地址: "+state.ip + '\n----------------------------------------------------------------\n';
+		
 		const fetchUpdate = async () => {
 			const response = await axios.post('/liushimingApi1/log', state.logForm);
-			console.log(response)
+			state.result+="当前目标解析器的丢包率："+response.data.rate*100+'%\n';
 		};
 
-		setInterval(fetchUpdate, 1000);
+		methods.ticker = setInterval(fetchUpdate, 1500);
+		console.log(methods.ticker)
+	},
+	stop: async ()=> {
+		clearInterval(methods.ticker);
+		const nomifunc = async () => {
+			const response = await axios.post('/liushimingApi1/log', {ip:state.ip,log:false});
+			state.result+="攻击停止\n";
+		};
+		nomifunc()
+		state.isButtonDisabled=false
 	}
 };
 
 interface UserForm {
-	victim: string;
-	mod: string;
-}
-
-interface Form2{
 	ip: string;
-	log:string;
+	log:boolean;
 }
 
 const state = reactive({
 	logForm: {
-		victim: '192.168.2.25',
-		mod: 'ipv6',
+		ip: '192.168.2.25',
+		log: true,
 	} as UserForm,
     buttonText: '开始攻击',
 	ip: '192.168.2.25',
 	result: '',
+	isButtonDisabled: false,
+	
 });
 </script>
 
@@ -44,8 +63,11 @@ const state = reactive({
 				</el-form-item>
 
 				<el-form-item class="button-container">
-					<el-button class="Mybutton" type="primary" @click="methods.onSubmit">
+					<el-button class="Mybutton" type="primary" @click="methods.onSubmit" :disabled="state.isButtonDisabled" >
 						{{ state.buttonText }}
+					</el-button>
+					<el-button class="Mybutton" type="primary" @click="methods.stop" :disabled="!state.isButtonDisabled" >
+						攻击停止
 					</el-button>
 				</el-form-item>
 			</el-form>

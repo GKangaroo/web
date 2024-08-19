@@ -1,18 +1,26 @@
 <script setup lang="ts">
-import { onMounted, reactive } from 'vue';
+import { onMounted, reactive,ref } from 'vue';
 import axios from 'axios';
 const methods = {
 	test: async () => {
-		const {data} = await axios.post('/liushimingApi2/test');
+		const {data} = await axios.post('/liushimingApi2/test',{domain:state.victim});
         if(data.code == 200){
             //
             state.isSuppot = "支持DNSSEC";
         }else{
             state.isSuppot = "不支持DNSSEC";
         }
+	},
+    attack: async () => {
+		const {data} = await axios.post('/liushimingApi2/capture',{domain:state.victim});
+        state.externalHtmlBefore = data.data
 
-        // const {data} = await axios.post('/liushimingApi2/test');
-        // state.externalHtmlBefore=data.data
+        state.amp += '*********已发起攻击*********\n'
+        await axios.post('/liushimingApi2/attack',{domain:state.victim});
+        state.amp += '*********域名已劫持*********\n'
+
+        const {data: data2} = await axios.post('/liushimingApi2/capture',{domain:state.victim});
+        state.externalHtmlAfter = data2.data
 	}
 };
 
@@ -22,16 +30,23 @@ interface UserForm {
 }
 
 const state = reactive({
-	form: {
-		victim: 'www.dnssec-bypass-victim.icu',
-		mod: 'ipv6',
-	} as UserForm,
+	victim: 'www.dnssec-bypass-victim.icu',
+
     buttonText: '开始攻击',
 	buttonStyle: { backgroundColor: ''},
     isSuppot: '',
     amp: "",
-    externalHtmlBefore: '<!DOCTYPE html>< html ><head><title>Hello, world!</ title ></head> </html>',
-    externalHtmlAfter: ''
+    externalHtmlBefore: '',
+    externalHtmlAfter: '',
+    sb: ref(`
+    <!DOCTYPE html>
+        < html >
+        <head>
+        <title>Hello, world! </title>
+        </head>
+
+    </html>`)
+    //<!DOCTYPE html><html><head><title>Hello, world!</title></head> </html>
 });
 </script>
 
@@ -39,9 +54,9 @@ const state = reactive({
     <div class="display-flex j-c-c a-i-c height100">
         <div class="login-form">
             <h1 class="title">域名输入</h1>
-            <el-form :model="state.form">
+            <el-form >
                 <el-form-item prop="email" label="域名">
-                    <el-input v-model="state.form.victim" placeholder="请输入域名"></el-input>
+                    <el-input v-model="state.victim" placeholder="请输入域名"></el-input>
                 </el-form-item>
 
                 <el-form-item class="button-container">
@@ -49,21 +64,21 @@ const state = reactive({
                         :style="{ backgroundColor: state.buttonStyle.backgroundColor }">
                         检测DNSSEC
                     </el-button>
-                    <el-button class="Mybutton" type="primary"
+                    <el-button class="Mybutton" type="primary" @click="methods.attack"
                         :style="{ backgroundColor: state.buttonStyle.backgroundColor }">
-                        捕获现在的页面
+                        发起攻击
                     </el-button>
                 </el-form-item>
-                <el-button class="Mybutton" type="primary"
+                <!-- <el-button class="Mybutton" type="primary"
                     :style="{ backgroundColor: state.buttonStyle.backgroundColor }">
                     发起攻击
-                </el-button>
+                </el-button> -->
             </el-form>
         </div>
     </div>
     <div class="Output-form">
-        <h1 class="title">是否支持DNSSEC</h1>
-        <el-form :model="state.form">
+        <h1 class="title">输出框</h1>
+        <el-form>
             <el-form-item prop="email">
                 <el-input v-model="state.amp" placeholder="" disabled></el-input>
             </el-form-item>
@@ -77,7 +92,7 @@ const state = reactive({
                     <span>攻击前</span>
                 </div>
             </template>
-            <div v-html="state.externalHtmlBefore"></div>
+            <div>{{state.externalHtmlBefore}}</div>
         </el-card>
         <el-card class="box-card">
             <template #header>
@@ -88,6 +103,7 @@ const state = reactive({
             <div v-html="state.externalHtmlAfter"></div>
         </el-card>
     </div>
+
 </template>
 
 
@@ -135,7 +151,7 @@ const state = reactive({
 .Mybutton {
 	text-align: center;
 	margin: 0 auto;
-	
+	width: 130px;
 }
 
 .card-container {
