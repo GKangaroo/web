@@ -4,7 +4,7 @@ import axios from 'axios';
 const methods = {
 	test: async () => {
 		const {data} = await axios.post('/liushimingApi2/test',{domain:state.victim});
-        if(data.code == 200){
+        if(data.code == "200"){
             //
             state.isSuppot = "支持DNSSEC";
         }else{
@@ -12,15 +12,17 @@ const methods = {
         }
 	},
     attack: async () => {
-		const {data} = await axios.post('/liushimingApi2/capture',{domain:state.victim});
-        state.externalHtmlBefore = data.data
+		const {data} = await axios.post('/liushimingApi2/capture',{"url":state.victim});
+        state.externalHtmlBefore = data
+        console.log(data)
 
         state.amp += '*********已发起攻击*********\n'
         await axios.post('/liushimingApi2/attack',{domain:state.victim});
         state.amp += '*********域名已劫持*********\n'
 
-        const {data: data2} = await axios.post('/liushimingApi2/capture',{domain:state.victim});
-        state.externalHtmlAfter = data2.data
+        const {data: data2} = await axios.post('/liushimingApi2/capture',{"url":state.victim});
+        console.log(data2.data)
+        state.externalHtmlAfter = data2
 	}
 };
 
@@ -30,7 +32,7 @@ interface UserForm {
 }
 
 const state = reactive({
-	victim: 'www.dnssec-bypass-victim.icu',
+	victim: 'http://www.dnssec-bypass-victim.icu',
 
     buttonText: '开始攻击',
 	buttonStyle: { backgroundColor: ''},
@@ -45,7 +47,8 @@ const state = reactive({
         <title>Hello, world! </title>
         </head>
 
-    </html>`)
+    </html>`),
+    bigsb: `srcdoc="<p>Hello world!</p>"`
     //<!DOCTYPE html><html><head><title>Hello, world!</title></head> </html>
 });
 </script>
@@ -80,7 +83,7 @@ const state = reactive({
         <h1 class="title">输出框</h1>
         <el-form>
             <el-form-item prop="email">
-                <el-input v-model="state.amp" placeholder="" disabled></el-input>
+                <el-input v-model="state.isSuppot" placeholder="" disabled></el-input>
             </el-form-item>
         </el-form>
     </div>
@@ -92,7 +95,9 @@ const state = reactive({
                     <span>攻击前</span>
                 </div>
             </template>
-            <div>{{state.externalHtmlBefore}}</div>
+            <!-- <iframe :src=state.sb></iframe> -->
+            <!-- <div >{{state.externalHtmlBefore}}</div> -->
+            <div v-html="state.externalHtmlBefore"></div>
         </el-card>
         <el-card class="box-card">
             <template #header>
