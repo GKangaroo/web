@@ -13,16 +13,14 @@ const methods = {
 	},
     attack: async () => {
 		const {data} = await axios.post('/liushimingApi2/capture',{"url":state.victim});
-        state.externalHtmlBefore = data
-        console.log(data)
+        state.externalHtmlBefore = data.data
 
         state.amp += '*********已发起攻击*********\n'
         await axios.post('/liushimingApi2/attack',{domain:state.victim});
         state.amp += '*********域名已劫持*********\n'
 
         const {data: data2} = await axios.post('/liushimingApi2/capture',{"url":state.victim});
-        console.log(data2.data)
-        state.externalHtmlAfter = data2
+        state.externalHtmlAfter = data2.data
 	}
 };
 
@@ -95,9 +93,8 @@ const state = reactive({
                     <span>攻击前</span>
                 </div>
             </template>
-            <!-- <iframe :src=state.sb></iframe> -->
-            <!-- <div >{{state.externalHtmlBefore}}</div> -->
-            <div v-html="state.externalHtmlBefore"></div>
+            <iframe :src=state.sb></iframe>
+            <div>{{state.externalHtmlBefore}}</div>
         </el-card>
         <el-card class="box-card">
             <template #header>

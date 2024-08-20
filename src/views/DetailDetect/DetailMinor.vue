@@ -3,47 +3,17 @@ import { onMounted, reactive } from 'vue';
 import axios from 'axios';
 const methods = {
 	onSubmit: async () => {
-		state.isAttacking = !state.isAttacking;
-        if (state.isAttacking) {
-            state.buttonText = '停止攻击';
-            state.buttonStyle.backgroundColor = 'red';
-			const { data } = await axios.post('/ipv6api2/stop');
-        } else {
-            state.buttonText = '继续攻击';
-            state.buttonStyle.backgroundColor = 'blue';
-			const { data } = await axios.post('/ipv6api2/start', state.form);
-		}
-		const fetchUpdate = async () => {
-			const response = await axios.get('/ipv6api2/amp');
-			state.amp = response.data.join('');
-		};
+		const { data } = await axios.post('127.0.0.1:5000/api/start',{
+			"choice" : "main_auth",
+			"value" :state.form.victim
+		});
+		state.mai = data
 
-		setInterval(fetchUpdate, 1000);
-
-		// const { data } = await axios.post('/api/auth/login/', state.form);
-		// if (data.code != 200) {
-		// 	ElMessage({
-		// 		message: data.data.message,
-		// 		type: 'error'
-		// 	});
-		// } else {
-		// 	ElMessage({
-		// 		type: 'success',
-		// 		message: 'login succeeded',
-		// 		onClose: () => {
-		// 			setLoginStorage(data);
-		// 			updateNotificationItem(NOTIFICATION_USAGE_TIP, true);
-		// 			const redirect = router.currentRoute.value.query.redirect;
-		// 			if (redirect) {
-		// 				router.push(redirect as string);
-		// 			} else {
-		// 				router.push({
-		// 					name: 'Upload'
-		// 				});
-		// 			}
-		// 		}
-		// 	});
-		// }
+		const { data:data2 } = await axios.post('127.0.0.1:5000/api/start',{
+			"choice" : "backup_auth",
+			"value" :state.form.victim
+		});
+		state.bac = data2
 	}
 };
 
@@ -60,7 +30,9 @@ const state = reactive({
     buttonText: '开始攻击',
 	buttonStyle: { backgroundColor: ''},
 	isAttacking: false,
-	amp:""
+	amp:"",
+	mai: "",
+	bac: ""
 });
 </script>
 
@@ -86,10 +58,10 @@ const state = reactive({
 			<h1 class="title">探测结果</h1>
 			<el-form :model="state.form">
 				<el-form-item prop="email" label="主权威服务器">
-					<el-input v-model="state.form.Ip" placeholder="" disabled></el-input>
+					<el-input v-model="state.mai" placeholder="" disabled></el-input>
 				</el-form-item>
 				<el-form-item prop="email" label="辅权威服务器">
-					<el-input v-model="state.form.Ip" placeholder="" disabled></el-input>
+					<el-input v-model="state.bac" placeholder="" disabled></el-input>
 				</el-form-item>
 			</el-form>
 		</div>

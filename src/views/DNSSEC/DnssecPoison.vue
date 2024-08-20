@@ -12,30 +12,7 @@ const methods = {
 		}
 		console.log(state.form.Ip)
 		console.log(state.form.Mode)
-		// const { data } = await axios.post('/api/auth/login/', state.form);
-		// if (data.code != 200) {
-		// 	ElMessage({
-		// 		message: data.data.message,
-		// 		type: 'error'
-		// 	});
-		// } else {
-		// 	ElMessage({
-		// 		type: 'success',
-		// 		message: 'login succeeded',
-		// 		onClose: () => {
-		// 			setLoginStorage(data);
-		// 			updateNotificationItem(NOTIFICATION_USAGE_TIP, true);
-		// 			const redirect = router.currentRoute.value.query.redirect;
-		// 			if (redirect) {
-		// 				router.push(redirect as string);
-		// 			} else {
-		// 				router.push({
-		// 					name: 'Upload'
-		// 				});
-		// 			}
-		// 		}
-		// 	});
-		// }
+
 	}
 };
 

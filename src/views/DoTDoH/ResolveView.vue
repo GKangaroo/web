@@ -3,13 +3,24 @@ import { effect, onMounted, reactive } from 'vue';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 let IntervalId:number;
 const methods = {
+	ticker:1,
 	GetEffect: async () => {
-		const { data } = await axios.get('/ipv6api/getresult');
-		state.effect = data
+		const fetchUpdate = async () => {
+			const response = await axios.post('/cuishiboApi3/dig-monitor', state.form);
+			state.effect=response.data;
+		};
+		methods.ticker = setInterval(fetchUpdate, 1500);
 	},
+	
 	attack: async () => {
-		const { data } = await axios.post('/cuishiboApi2/api/dns-data-injection',state.form);
-		state.effect = data
+		if(state.mode == "0"){
+			const { data } = await axios.post('/cuishiboApi2/inject-dns',state.form);
+			state.attackline = data;
+		}else{
+			const { data } = await axios.post('/cuishiboApi2/poison-dns',state.form);
+			state.attackline = data;
+		}
+
 	}
 };
 
@@ -34,11 +45,12 @@ interface UserForm {
 
 const state = reactive({
 	form: {
-		target_ip: '192.168.1.10',
-		target_domain: 'example.com',
-		injection_value: '10.0.0.1',
+		target_ip: '192.168.2.2',
+		target_domain: 'www.example.com',
+		injection_value: '0.0.0.0',
 		ttl: 300
 	} as UserForm,
+	mode: "0",
     buttonText: '开始攻击',
 	buttonStyle: { backgroundColor: ''},
 	isAttacking: false,
@@ -69,13 +81,13 @@ const state = reactive({
 					</el-form-item>
 				</el-form>
 
-				<el-radio-group v-model="state.form.mode">
+				<el-radio-group v-model="state.mode">
 					<el-radio value="0">解析数据注入</el-radio>
 					<el-radio value="1">解析数据篡改</el-radio>
 				</el-radio-group>
 
 				<el-form-item class="button-container">
-					<el-button class="Mybutton" type="primary" @click="methods.attack"
+					<el-button class="Mybutton" type="primary" @click="methods.GetEffect"
 						:style="{ backgroundColor: state.buttonStyle.backgroundColor }">
 						{{ state.buttonText }}
 					</el-button>

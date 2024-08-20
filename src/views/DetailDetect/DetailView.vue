@@ -1,7 +1,8 @@
 <template>
   <div class="button-container">
-    <el-button type="primary" class="custom-button" @click="methods.menuItemClick('DetectionMinor')">主从权威服务器属性测试</el-button>
-    <el-button type="success" class="custom-button" @click="methods.menuItemClick('DetectionMajor')">其他属性测试</el-button>
+    <el-button type="primary" class="custom-button" @click="methods.menuItemClick('DetectionMinor')">测试主从权威服务器</el-button>
+    <el-button type="success" class="custom-button" @click="methods.menuItemClick('DetectionMajor')">测试服务器指纹</el-button>
+    <el-button type="warning" class="custom-button" @click="methods.menuItemClick('DetectionMiddle')">测试IP相关属性</el-button>
   </div>
 </template>
 

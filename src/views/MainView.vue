@@ -30,6 +30,13 @@
         </template>
       </el-menu-item>
     </el-menu>
+<!-- 
+    <el-breadcrumb separator="/">
+      <el-breadcrumb-item v-for="(item, index) in breadcrumbItems" :key="index">
+        <span @click="item.click">{{ item.label }}</span>
+      </el-breadcrumb-item>
+    </el-breadcrumb> -->
+
     <router-view></router-view>
   </div>
 </template>

@@ -3,6 +3,10 @@ import { effect, onMounted, reactive } from 'vue';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 let IntervalId:number;
 const methods = {
+	Attack: async () => {
+		const { data } = await axios.post('/cuishiboApi1/run_attack', {"target_ip":state.form.victim});
+		state.effect = data
+	},
 	GetEffect: async () => {
 		const { data } = await axios.get('/ipv6api/getresult');
 		state.effect = data
@@ -40,7 +44,8 @@ const state = reactive({
 	isAttacking: false,
 	effect: '',
 	attackline : "",
-	polling: false
+	polling: false,
+	url: "192.168.2.3:8000"
 });
 </script>
 
@@ -75,7 +80,7 @@ const state = reactive({
 						<span>被攻击的页面此时的状况</span>
 					</div>
 				</template>
-				<iframe src="https://www.runoob.com" width="350"
+				<iframe src=state.url width="350"
 				height="300"></iframe>
 			</el-card>
 		</div>

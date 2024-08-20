@@ -23,6 +23,11 @@ export const routes = [
                 component: () => import('../views/DetailDetect/DetailMajor.vue')
             },
             {
+                path: '/Detection/Middle', 
+                name: 'DetectionMiddle',
+                component: () => import('../views/DetailDetect/DetailMiddle.vue')
+            },
+            {
                 path: '/Detection/Minor', 
                 name: 'DetectionMinor',
                 component: () => import('../views/DetailDetect/DetailMinor.vue')
